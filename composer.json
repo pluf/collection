@@ -1,6 +1,6 @@
 {
-	"name" : "pluf/bank",
-	"description" : "A pluf module to pay and manage online payments",
+	"name" : "pluf/collection",
+	"description" : "A document collection data model.",
 	"type" : "library",
 	"license" : "MIT",
 	"authors" : [{
@@ -32,13 +32,13 @@
 	"include-path" : [
 		"src/"
 	],
-	"homepage" : "https://github.com/pluf/sdp",
+	"homepage" : "https://github.com/pluf/collection",
 	"support" : {
 		"email" : "info@pluf.ir",
-		"issues" : "https://github.com/pluf/cms/issues",
-		"forum" : "https://github.com/pluf/cms",
-		"wiki" : "https://github.com/pluf/cms/wiki",
-		"source" : "https://github.com/pluf/cms"
+		"issues" : "https://github.com/pluf/collection/issues",
+		"forum" : "https://github.com/pluf/collection",
+		"wiki" : "https://github.com/pluf/collection/wiki",
+		"source" : "https://github.com/pluf/collection"
 	},
 	"keywords" : [
 		"pluf",
