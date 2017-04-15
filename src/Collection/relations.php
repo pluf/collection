@@ -18,17 +18,17 @@
  */
 return array (
         'Collection_Collection' => array(
-                'relate_to_many' => array(
-                        'Collection_Document'
-                )
+//                 'relate_to_many' => array(
+//                         'Collection_Document'
+//                 )
         ),
         'Collection_Document' => array(
                 'relate_to' => array(
                         'Collection_Collection'
                 ),
-                'relate_to_many' => array(
-                        'Collection_Attribute'
-                )
+//                 'relate_to_many' => array(
+//                         'Collection_Attribute'
+//                 )
         ),
         'Collection_Attribute' => array(
                 'relate_to' => array(

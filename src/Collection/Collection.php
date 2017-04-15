@@ -26,9 +26,16 @@ class Collection_Collection extends Pluf_Model
                         'editable' => true,
                         'readable' => true
                 ),
+                'title' => array(
+                        'type' => 'Pluf_DB_Field_Varchar',
+                        'blank' => true,
+                        'size' => 250,
+                        'editable' => true,
+                        'readable' => true
+                ),
                 'description' => array(
                         'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => false,
+                        'blank' => true,
                         'size' => 500,
                         'editable' => true,
                         'readable' => true
