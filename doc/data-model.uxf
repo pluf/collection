@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>40</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Collection
+--
+id: long</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>290</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Document
+--
+id: long</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>290</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Attribute
+--
+id: long
+key: string
+value: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>300</y>
+      <w>250</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+contains &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>120</y>
+      <w>80</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n
+contains</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+</diagram>

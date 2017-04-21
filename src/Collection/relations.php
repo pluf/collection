@@ -17,5 +17,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 return array (
-
+        'Collection_Collection' => array(
+//                 'relate_to_many' => array(
+//                         'Collection_Document'
+//                 )
+        ),
+        'Collection_Document' => array(
+                'relate_to' => array(
+                        'Collection_Collection'
+                ),
+//                 'relate_to_many' => array(
+//                         'Collection_Attribute'
+//                 )
+        ),
+        'Collection_Attribute' => array(
+                'relate_to' => array(
+                        'Collection_Document',
+                )
+        ),
 );
