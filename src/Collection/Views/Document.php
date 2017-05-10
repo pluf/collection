@@ -267,6 +267,7 @@ class Collection_Views_Document
                                     "`key`='" . $key . "'"
                             )
                     ));
+            // FIXME: maso, 2017: remove key if value is empty
             if ($attr === null) {
                 $attr2 = new Collection_Attribute();
                 $attr2->document = $document;

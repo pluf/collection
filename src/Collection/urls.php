@@ -106,7 +106,7 @@ return array(
         'http-method' => 'GET'
     ),
     array( // Update a Document of Collection
-        'regex' => '#^/(?P<collectionId>\d+)/document/(?P<modelId>\d+)$#',
+        'regex' => '#^/(?P<collectionId>\d+)/document/(?P<documentId>\d+)$#',
         'model' => 'Collection_Views_Document',
         'method' => 'putMap',
         'http-method' => 'POST',
