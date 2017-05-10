@@ -1,6 +1,11 @@
 {
 	"name": "Collection",
 	"title": "Collection framework",
-	"model": [],
-	"permisson": []
+	"model": [
+		"Collection_Collection",
+		"Collection_Document",
+		"Collection_Attribute"
+	],
+	"permisson": [],
+	"monitor":[]
 }
