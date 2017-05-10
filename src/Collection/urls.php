@@ -102,13 +102,13 @@ return array(
     array( // Get information
         'regex' => '#^/(?P<collectionId>\d+)/document/(?P<documentId>\d+)$#',
         'model' => 'Collection_Views_Document',
-        'method' => 'get',
+        'method' => 'getMap',
         'http-method' => 'GET'
     ),
     array( // Update a Document of Collection
         'regex' => '#^/(?P<collectionId>\d+)/document/(?P<modelId>\d+)$#',
         'model' => 'Collection_Views_Document',
-        'method' => 'update',
+        'method' => 'putMap',
         'http-method' => 'POST',
         'params' => array(
             'model' => 'Collection_Document'
