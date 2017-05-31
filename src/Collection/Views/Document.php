@@ -1,5 +1,6 @@
 <?php
 Pluf::loadFunction('Pluf_Shortcuts_GetObjectOr404');
+Pluf::loadFunction('Pluf_Shortcuts_GetFormForModel');
 Pluf::loadFunction('Collection_Shortcuts_NormalizeItemPerPage');
 
 /**
@@ -19,7 +20,7 @@ class Collection_Views_Document
      * @param array $p            
      * @return Pluf_HTTP_Response
      */
-    public static function create ($request, $match, $p)
+    public function create ($request, $match, $p)
     {
         // check collection
         if (isset($match['collectionId'])) {
@@ -30,8 +31,11 @@ class Collection_Views_Document
         }
         Pluf_Shortcuts_GetObjectOr404('Collection_Collection', $collectionId);
         // create document
-        $plufService = new Pluf_Views();
-        return $plufService->createObject($request, $match, $p);
+        $object = new Collection_Document();
+        $form = Pluf_Shortcuts_GetFormForModel($object, $request->REQUEST, array());
+        $object = $form->save();
+        $this->putDocumentMap($object, $request->REQUEST);
+        return new Pluf_HTTP_Response_Json($this->getDocumentMap($object));
     }
 
     /**
@@ -42,7 +46,7 @@ class Collection_Views_Document
      * @throws Pluf_Exception_DoesNotExist
      * @return Pluf_HTTP_Response_Json
      */
-    public static function get ($request, $match)
+    public function get ($request, $match)
     {
         if (isset($match['collectionId'])) {
             $collectionId = $match['collectionId'];
@@ -69,7 +73,7 @@ class Collection_Views_Document
      * @param array $match            
      * @return Pluf_HTTP_Response_Json
      */
-    public static function find ($request, $match)
+    public function find ($request, $match)
     {
         // check for collection
         if (isset($match['collectionId'])) {
@@ -101,7 +105,12 @@ class Collection_Views_Document
         $paginator->items_per_page = Collection_Shortcuts_NormalizeItemPerPage(
                 $request);
         $paginator->setFromRequest($request);
-        return new Pluf_HTTP_Response_Json($paginator->render_object());
+        $docs = $paginator->render_object();
+        // TODO: maso, 2017: pass list of attributes
+        foreach ($docs['items'] as $key => $value) {
+            $docs['items'][$key] = $this->getDocumentMap($value);
+        }
+        return new Pluf_HTTP_Response_Json($docs);
     }
 
     /**
@@ -112,7 +121,7 @@ class Collection_Views_Document
      * @throws Pluf_Exception_DoesNotExist
      * @return Pluf_HTTP_Response_Json
      */
-    public static function remove ($request, $match)
+    public function remove ($request, $match)
     {
         if (isset($match['collectionId'])) {
             $collectionId = $match['collectionId'];
@@ -150,7 +159,7 @@ class Collection_Views_Document
      * @throws Pluf_Exception_DoesNotExist
      * @return Pluf_HTTP_Response
      */
-    public static function update ($request, $match, $p)
+    public function update ($request, $match, $p)
     {
         // check collection
         if (isset($match['collectionId'])) {
@@ -180,7 +189,7 @@ class Collection_Views_Document
      * @param Pluf_HTTP_Request $request            
      * @param array $match            
      */
-    public static function getMap ($request, $match)
+    public function getMap ($request, $match)
     {
         if (isset($match['collectionId'])) {
             $collectionId = $match['collectionId'];
@@ -204,10 +213,54 @@ class Collection_Views_Document
                              $collectionId . ')');
         }
         
+        return new Pluf_HTTP_Response_Json($this->getDocumentMap($document));
+    }
+
+    /**
+     * Puts attributes of a document
+     *
+     * @param Pluf_HTTP_Request $request            
+     * @param array $match            
+     */
+    public function putMap ($request, $match)
+    {
+        if (isset($match['collectionId'])) {
+            $collectionId = $match['collectionId'];
+        } else {
+            $collectionId = $request->REQUEST['collectionId'];
+        }
+        // $collection = Pluf_Shortcuts_GetObjectOr404('Collection_Collection',
+        // $collectionId);
+        if (isset($match['documentId'])) {
+            $documentId = $match['documentId'];
+        } else {
+            $documentId = $request->REQUEST['documentId'];
+        }
+        $document = Pluf_Shortcuts_GetObjectOr404('Collection_Document', 
+                $documentId);
+        
+        if ($document->collection != $collectionId) {
+            throw new Pluf_Exception_DoesNotExist(
+                    'Document with id (' . $documentId .
+                             ') does not exist in collection with id (' .
+                             $collectionId . ')');
+        }
+        
+        $this->putDocumentMap($document, $request->REQUEST);
+        return new Pluf_HTTP_Response_Json($this->getDocumentMap($document));
+    }
+    
+    /**
+     * Gets all attributes of a document and return as map
+     * 
+     * @param $document 
+     * @return maps of attributes
+     */
+    private function getDocumentMap($document){
         $attr = new Collection_Attribute();
         $map = $attr->getList(
                 array(
-                        'filter' => 'document=' . $documentId
+                        'filter' => 'document=' . $document->id
                 ));
         $result = array();
         $iterator = $map->getIterator();
@@ -219,43 +272,12 @@ class Collection_Views_Document
         
         $result['id'] = $document->id;
         $result['collection'] = $document->collection;
-        
-        return new Pluf_HTTP_Response_Json($result);
+        return $result;
     }
-
-    /**
-     * Puts attributes of a document
-     *
-     * @param Pluf_HTTP_Request $request            
-     * @param array $match            
-     */
-    public static function putMap ($request, $match)
-    {
-        if (isset($match['collectionId'])) {
-            $collectionId = $match['collectionId'];
-        } else {
-            $collectionId = $request->REQUEST['collectionId'];
-        }
-        // $collection = Pluf_Shortcuts_GetObjectOr404('Collection_Collection',
-        // $collectionId);
-        if (isset($match['documentId'])) {
-            $documentId = $match['documentId'];
-        } else {
-            $documentId = $request->REQUEST['documentId'];
-        }
-        $document = Pluf_Shortcuts_GetObjectOr404('Collection_Document', 
-                $documentId);
-        
-        if ($document->collection != $collectionId) {
-            throw new Pluf_Exception_DoesNotExist(
-                    'Document with id (' . $documentId .
-                             ') does not exist in collection with id (' .
-                             $collectionId . ')');
-        }
-        
-        $result = array();
+    
+    private function putDocumentMap($document, $map){
         $attrModel = new Collection_Attribute();
-        foreach ($request->REQUEST as $key => $value) {
+        foreach ($map as $key => $value) {
             // Ignore main attributes
             if ($key === 'id' || $key === 'collection') {
                 continue;
@@ -263,7 +285,7 @@ class Collection_Views_Document
             $attr = $attrModel->getOne(
                     array(
                             'filter' => array(
-                                    '`document`=' . $documentId,
+                                    '`document`=' . $document->id,
                                     "`key`='" . $key . "'"
                             )
                     ));
@@ -278,8 +300,6 @@ class Collection_Views_Document
                 $attr->value = $value;
                 $attr->update();
             }
-            $result[$key] = $value;
         }
-        return new Pluf_HTTP_Response_Json($result);
     }
 }
