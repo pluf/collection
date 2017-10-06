@@ -60,6 +60,12 @@ return array(
             'model' => 'Collection_Collection'
         )
     ),
+    array( // Get info (by name)
+        'regex' => '#^/(?P<name>[^/]+)$#',
+        'model' => 'Collection_Views_Collection',
+        'method' => 'getByName',
+        'http-method' => 'GET'
+    ),
     array( // Delete
         'regex' => '#^/(?P<modelId>\d+)$#',
         'model' => 'Pluf_Views',
