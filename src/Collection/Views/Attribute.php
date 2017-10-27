@@ -93,7 +93,7 @@ class Collection_Views_Attribute
         } else {
             $documentId = $request->REQUEST['documentId'];
         }
-        // $document = Pluf_Shortcuts_GetObjectOr404('Collection_Document', $documentId);
+        $document = Pluf_Shortcuts_GetObjectOr404('Collection_Document', $documentId);
         if (isset($match['attributeId'])) {
             $attributeId = $match['attributeId'];
         } else {
@@ -101,7 +101,7 @@ class Collection_Views_Attribute
         }
         $attribute = Pluf_Shortcuts_GetObjectOr404('Collection_Attribute', $attributeId);
         
-        if ($attribute->document !== $documentId) {
+        if ($attribute->document !== $document->id) {
             throw new Pluf_Exception_DoesNotExist('Attribute with id (' . $attributeId . ') does not exist in document with id (' . $documentId . ')');
         }
         $attributeCopy = Pluf_Shortcuts_GetObjectOr404('Collection_Attribute', $attributeId);
