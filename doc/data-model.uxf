@@ -7,11 +7,14 @@
       <x>170</x>
       <y>40</y>
       <w>210</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Collection
 --
-id: long</panel_attributes>
+id: long
+name: string
+title: string
+description: string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -60,14 +63,14 @@ contains &gt;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>270</x>
-      <y>120</y>
+      <y>130</y>
       <w>80</w>
-      <h>190</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 contains</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
   </element>
 </diagram>

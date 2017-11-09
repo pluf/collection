@@ -257,6 +257,7 @@ class Collection_Views_Document
      * @return maps of attributes
      */
     private function getDocumentMap($document){
+        // TODO: hadi 1396-07: It is better to move this function to Collection_Document class
         $attr = new Collection_Attribute();
         $map = $attr->getList(
                 array(
@@ -276,6 +277,7 @@ class Collection_Views_Document
     }
     
     private function putDocumentMap($document, $map){
+        // TODO: hadi 1396-07: It is better to move this function to Collection_Document class
         $attrModel = new Collection_Attribute();
         foreach ($map as $key => $value) {
             // Ignore main attributes
