@@ -101,8 +101,7 @@ return array(
             'model' => 'Collection_Document'
         ),
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Get information
@@ -120,8 +119,7 @@ return array(
             'model' => 'Collection_Document'
         ),
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Remove a Document
@@ -130,8 +128,7 @@ return array(
         'method' => 'remove',
         'http-method' => 'DELETE',
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Remove a Document
@@ -140,8 +137,7 @@ return array(
         'method' => 'remove',
         'http-method' => 'DELETE',
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Get Document Value
@@ -172,8 +168,7 @@ return array(
             'model' => 'Collection_Attribute'
         ),
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Get Attribute
@@ -191,8 +186,7 @@ return array(
             'model' => 'Collection_Attribute'
         ),
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     ),
     array( // Delete Attribute
@@ -201,8 +195,7 @@ return array(
         'method' => 'remove',
         'http-method' => 'DELETE',
         'precond' => array(
-            'Pluf_Precondition::loginRequired',
-            'Pluf_Precondition::memberRequired'
+            'User_Precondition::loginRequired'
         )
     )
 );
