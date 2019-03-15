@@ -11,6 +11,9 @@ composer.phar
 
 # Project
 storage/tenant
+tests/tmp
+tests/storage
+/build/
 
 # KDE
 .directory
